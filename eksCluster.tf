@@ -1,0 +1,71 @@
+# EKS cluster configuration
+resource "aws_eks_cluster" "eks_groudplex_01" {
+  name     = var.eks_cluster_name
+  role_arn = aws_iam_role.eksClusterRole.arn
+  version  = var.cluster_version
+
+  vpc_config {
+    subnet_ids         = aws_subnet.private_subnet.*.id
+    security_group_ids = [aws_security_group.Cluster_SG.id]
+  }
+
+  # Ensures that IAM Role permissions are created before and deleted after EKS Cluster handling.
+  # Otherwise, EKS will not be able to properly delete EKS managed EC2 infrastructure such as Security Groups.
+  depends_on = [
+    aws_iam_role_policy_attachment.AmazonEKSClusterPolicy,
+    aws_iam_role_policy_attachment.AmazonEKSServicePolicy
+  ]
+
+  tags = {
+    Name = "Groundplex K8S cluster",
+  }
+}
+
+# Worker Nodes configuration
+resource "aws_eks_node_group" "eks_nodes" {
+  cluster_name    = aws_eks_cluster.eks_groudplex_01.name
+  node_group_name = "Workers"
+  node_role_arn   = aws_iam_role.eksNodesRole.arn
+  subnet_ids      = aws_subnet.private_subnet.*.id
+
+  scaling_config {
+    desired_size = 1
+    max_size     = 1
+    min_size     = 1
+  }
+
+  update_config {
+    max_unavailable = 1
+  }
+
+  ami_type       = var.ami_type
+  instance_types = var.cluster_instance
+  capacity_type  = var.capacity
+
+  depends_on = [
+    aws_iam_role_policy_attachment.AmazonEKSWorkerNodePolicy,
+    aws_iam_role_policy_attachment.AmazonEKS_CNI_Policy,
+    aws_iam_role_policy_attachment.AmazonEC2ContainerRegistryReadOnly,
+  ]
+
+  tags = {
+    Name = "Groundplex K8S node"
+  }
+}
+
+resource "null_resource" "kubeconfig" {
+  depends_on = [
+    aws_eks_cluster.eks_groudplex_01
+  ]
+
+  provisioner "local-exec" {
+    command = "aws eks --region ${var.region} update-kubeconfig --name ${var.eks_cluster_name}"
+  }
+
+  /*provisioner "local-exec" {
+    command = "./Deployments.sh"
+    interpreter = [ "sh" ]
+    working_dir = path.root
+  }*/
+}
+

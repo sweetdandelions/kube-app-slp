@@ -1,0 +1,21 @@
+prometheus:
+  # Run `kubectl get svc -n namespace` to get the url of Prometheus
+  url: http://prometheus-kube-prometheus-prometheus.monitoring.svc
+  # Prometheus's port. Currently it is LoadBalancer with 80 default.
+  port: 80
+replicas: 1
+rules:
+  # Whether to enable the default rules
+  default: false
+  # Add custom metrics API here
+  custom:
+  # plex_queue_size API
+  - seriesQuery: 'plex_queue_size'
+    resources:
+      overrides:
+        namespace: {resource: "namespace"}
+        pod: {resource: "pod"}
+    name:
+      matches: ^(.*)
+      as: "plex_queue_size"
+    metricsQuery: <<.Series>>{<<.LabelMatchers>>}
