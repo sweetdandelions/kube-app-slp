@@ -29,3 +29,6 @@ helm upgrade --install prometheus-adapter prometheus-community/prometheus-adapte
 
 kubectl get --raw /apis/custom.metrics.k8s.io/v1beta1 | jq .
 ```
+The resources are returned:
+
+![Response](https://github.com/sweetdandelions/kube-app-slp/blob/main/Screenshot%202023-05-21%20221826.png)
