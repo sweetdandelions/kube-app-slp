@@ -1,13 +1,19 @@
+Clone the repo
+
 ```
-# kube-app-slp
-
 git clone git@github.com:sweetdandelions/kube-app-slp.git
-
 cd kube-app-slp/
+```
+You need to have an AWS account set up
+Terraform, kubectl and Helm installed
+
+```
 terraform init
+terraform plan
 terraform apply --auto-approve
-
-
+```
+Execute the commands (from the Deployments.sh file)
+```
 kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml
 
 kubectl create namespace monitoring
@@ -22,5 +28,4 @@ helm upgrade --install prometheus prometheus-community/kube-prometheus-stack -n 
 helm upgrade --install prometheus-adapter prometheus-community/prometheus-adapter --namespace monitoring -f adapter_custom_values.yaml
 
 kubectl get --raw /apis/custom.metrics.k8s.io/v1beta1 | jq .
-
 ```
