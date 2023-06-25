@@ -28,6 +28,9 @@ helm upgrade --install prometheus prometheus-community/kube-prometheus-stack -n 
 helm upgrade --install prometheus-adapter prometheus-community/prometheus-adapter --namespace monitoring -f adapter_custom_values.yaml
 
 kubectl get --raw /apis/custom.metrics.k8s.io/v1beta1 | jq .
+
+
+terraform destroy --auto-approve
 ```
 Empty custom metrics response:
 
