@@ -28,8 +28,10 @@ helm upgrade --install prometheus prometheus-community/kube-prometheus-stack -n 
 helm upgrade --install prometheus-adapter prometheus-community/prometheus-adapter --namespace monitoring -f adapter_custom_values.yaml
 
 kubectl get --raw /apis/custom.metrics.k8s.io/v1beta1 | jq .
+```
 
-
+You need to delete the Load Balancer created by Prometheus and one security group manually for the destroy to be successful (still haven't found a way to automate it). 
+```
 terraform destroy --auto-approve
 ```
 Empty custom metrics response:
