@@ -82,7 +82,9 @@ resource "aws_network_interface" "network_interface" {
 
 resource "aws_eip" "nat_public_ip" {
   instance = aws_instance.NAT_EC2[0].id
-  vpc      = true
+  domain   = "vpc"
+
+  depends_on = [aws_internet_gateway.IGW]
 }
 
 # NAT instance

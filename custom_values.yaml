@@ -15,7 +15,7 @@ prometheus:
           - role: pod
             namespaces:
               names:
-                # - default
+                # default
                 # If you install the Snaplex in your own namespace, you have to provide here.
                 - snaplogic
         scheme: https
