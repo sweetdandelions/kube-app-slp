@@ -37,3 +37,6 @@ terraform destroy --auto-approve
 Empty custom metrics response:
 
 ![Response](https://github.com/sweetdandelions/kube-app-slp/blob/main/Screenshot%202023-05-21%20221826.png)
+
+
+https://docs-snaplogic.atlassian.net/wiki/spaces/SD/pages/2017558845/Deploying+a+Groundplex+in+Kubernetes+with+Elastic+Scaling
