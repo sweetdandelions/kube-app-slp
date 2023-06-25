@@ -29,6 +29,11 @@ helm upgrade --install prometheus-adapter prometheus-community/prometheus-adapte
 
 kubectl get --raw /apis/custom.metrics.k8s.io/v1beta1 | jq .
 ```
+
+You need to delete the Load Balancer created by Prometheus and one security group manually for the destroy to be successful (still haven't found a way to automate it). 
+```
+terraform destroy --auto-approve
+```
 Empty custom metrics response:
 
 ![Response](https://github.com/sweetdandelions/kube-app-slp/blob/main/Screenshot%202023-05-21%20221826.png)
