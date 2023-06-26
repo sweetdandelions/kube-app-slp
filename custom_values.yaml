@@ -10,12 +10,12 @@ prometheus:
     additionalScrapeConfigs:
       - job_name: 'snaplogic-snaplex-hpa-jcc-autoscale-metrics'
         scrape_interval: 15s
-        metrics_path: '/autoscale_metrics' # default is metrics
+        metrics_path: '/metrics' # default is metrics
         kubernetes_sd_configs:
           - role: pod
             namespaces:
               names:
-                # - default
+                # default
                 # If you install the Snaplex in your own namespace, you have to provide here.
                 - snaplogic
         scheme: https

@@ -45,7 +45,7 @@ variable "eks_cluster_name" {
 }
 
 variable "cluster_version" {
-  default = "1.25"
+  default = "1.26"
 }
 
 # Ubuntu ami

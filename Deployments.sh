@@ -8,16 +8,16 @@ helm repo add prometheus-community https://prometheus-community.github.io/helm-c
 
 helm repo update
 
-helm upgrade --install prometheus prometheus-community/kube-prometheus-stack -n monitoring -f custom_values.yaml
+helm upgrade --install prometheus prometheus-community/kube-prometheus-stack --namespace monitoring -f custom_values.yaml
 
 #kubectl apply -f components.yaml
 
 # kubectl --namespace monitoring get pods -l "release=prometheus"
 # kubectl get all -n monitoring
 
-helm upgrade --install prometheus-adapter prometheus-community/prometheus-adapter --namespace monitoring -f adapter_custom_values.yaml
+helm upgrade --install prometheus-adapter prometheus-community/prometheus-adapter --version "2.12.1" -n monitoring -f adapter_custom_values.yaml
 
-# kubectl port-forward -n monitoring service/prometheus-kube-prometheus-prometheus 9090:80
+# kubectl port-forward -n monitoring prometheus-prometheus-kube-prometheus-prometheus-0 8080:9090
 # curl -X GET -kG "http:/localhost:9090/api/v1/query?" 
 
 # kubectl get --raw /apis/custom.metrics.k8s.io/v1beta1
