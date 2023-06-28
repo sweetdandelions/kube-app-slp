@@ -67,7 +67,7 @@ variable "nat_instance" {
 }
 
 variable "cluster_instance" {
-  default = ["t3.medium"]
+  default = ["t3.large"]
   type    = list(any)
 }
 

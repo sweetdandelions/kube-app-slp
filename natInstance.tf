@@ -68,6 +68,16 @@ resource "aws_security_group_rule" "NAT_ssh_ingress" {
   security_group_id = aws_security_group.NAT_SG.id
   type              = "ingress"
 }
+
+resource "aws_security_group_rule" "NAT_8081_ingress" {
+  description       = "Snaplex inbound"
+  cidr_blocks       = var.num_private_sub
+  protocol          = "tcp"
+  from_port         = 8081
+  to_port           = 8081
+  security_group_id = aws_security_group.NAT_SG.id
+  type              = "ingress"
+}
 #-------------------------------------------------------------
 
 resource "aws_network_interface" "network_interface" {

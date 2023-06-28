@@ -29,8 +29,8 @@ resource "aws_eks_node_group" "eks_nodes" {
   subnet_ids      = aws_subnet.private_subnet.*.id
 
   scaling_config {
-    desired_size = 1
-    max_size     = 1
+    desired_size = 2
+    max_size     = 2
     min_size     = 1
   }
 
@@ -48,6 +48,18 @@ resource "aws_eks_node_group" "eks_nodes" {
     aws_iam_role_policy_attachment.AmazonEC2ContainerRegistryReadOnly,
   ]
 
+  provisioner "local-exec" {
+    when = create
+    command = "./Deployments.sh"
+    interpreter = [ "sh" ]
+    working_dir = path.root
+  }
+
+  provisioner "local-exec" {
+    when = destroy
+    command = "kubectl delete svc snaplogic-snaplogic-snaplex-regular -n snaplogic"
+  }
+
   tags = {
     Name = "Groundplex K8S node"
   }
@@ -61,11 +73,5 @@ resource "null_resource" "kubeconfig" {
   provisioner "local-exec" {
     command = "aws eks --region ${var.region} update-kubeconfig --name ${var.eks_cluster_name}"
   }
-
-  /*provisioner "local-exec" {
-    command = "./Deployments.sh"
-    interpreter = [ "sh" ]
-    working_dir = path.root
-  }*/
 }
 
