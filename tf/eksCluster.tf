@@ -61,7 +61,10 @@ resource "aws_eks_node_group" "eks_nodes" {
   }
 
   tags = {
-    Name = "Groundplex K8S node"
+    "Name" = "Groundplex K8S node"
+    "k8s.io/cluster-autoscaler/enabled" = "true"
+    "k8s.io/cluster-autoscaler/eks_groudplex_01" = "owned"
+
   }
 }
 
@@ -75,3 +78,13 @@ resource "null_resource" "kubeconfig" {
   }
 }
 
+# aws-ebs-csi-driver
+resource "aws_eks_addon" "addons" {
+  for_each          = { for addon in var.addons : addon.name => addon }
+  cluster_name      = aws_eks_cluster.eks_groudplex_01.id
+  addon_name        = each.value.name
+  addon_version     = each.value.version
+  resolve_conflicts_on_create = "OVERWRITE"
+
+  depends_on = [ aws_eks_cluster.eks_groudplex_01 ]
+}

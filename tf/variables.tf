@@ -48,6 +48,25 @@ variable "cluster_version" {
   default = "1.26"
 }
 
+variable "addons" {
+  type = list(object({
+    name    = string
+    version = string
+  }))
+
+  default = [
+    {
+      name    = "aws-ebs-csi-driver"
+      version = "v1.20.0-eksbuild.1"
+    }
+  ]
+}
+
+variable "sa" {
+  type = list(string)
+  default = [ "ebs-csi-controller-sa", "cluster-autoscaler" ]
+}
+
 # Ubuntu ami
 variable "ami" {
   default = "ami-007855ac798b5175e" #Ubuntu
