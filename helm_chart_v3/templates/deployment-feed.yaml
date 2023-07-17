@@ -32,16 +32,19 @@ spec:
               path: /healthz
               port: 8084
             failureThreshold: 3
+            initialDelaySeconds: 300
             periodSeconds: 10
           livenessProbe:
             tcpSocket:
               port: 8084
             failureThreshold: 6
+            initialDelaySeconds: 300
             periodSeconds: 10
           startupProbe:
             tcpSocket:
               port: 8084
             failureThreshold: 30
+            initialDelaySeconds: 300
             periodSeconds: 10
           {{- end }}
           resources:

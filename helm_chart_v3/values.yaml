@@ -3,7 +3,7 @@
 # Declare variables to be passed into your templates.
 
 # Regular nodes count
-jccCount: 2
+jccCount: 1
 
 # Feedmaster nodes count
 feedmasterCount: 0
@@ -25,10 +25,10 @@ snaplogic_secret: snaplogic
 # CPU and memory limits/requests for the nodes
 limits:
   memory: 4Gi
-  cpu: 500m
+  cpu: 1000m
 requests:
   memory: 4Gi
-  cpu: 500m
+  cpu: 1000m
 
 # Default file ulimit and process ulimit
 sl_file_ulimit: 8192
@@ -40,27 +40,27 @@ probes:
 
 # JCC HPA
 autoscaling:
-  enabled: false
+  enabled: true
 
-  minReplicas:
-  maxReplicas:
+  minReplicas: 2
+  maxReplicas: 4
 
   # Average count of Snaplex queued pipelines (e.g. targetPlexQueueSize: 5), leave empty to disable
   # To enable this metric, Prometheus and Prometheus-Adapter are required to install.
-  targetPlexQueueSize:
+  targetPlexQueueSize: 2
 
   # Average CPU utilization (e.g. targetAvgCPUUtilization: 50 means 50%), leave empty to disable.
   # To enable this metric, Kubernetes Metrics Server is required to install.
-  targetAvgCPUUtilization:
+  targetAvgCPUUtilization: 80
 
   # Average memory utilization (e.g. targetAvgMemoryUtilization: 50 means 50%), leave empty to disable.
   # To enable this metric, Kubernetes Metrics Server is required to install.
-  targetAvgMemoryUtilization:
+  targetAvgMemoryUtilization: 70
 
   # window to consider waiting while scaling up. default is 0s if empty.
-  scaleUpStabilizationWindowSeconds:
+  scaleUpStabilizationWindowSeconds: 0
   # window to consider waiting while scaling down. default is 300s if empty.
-  scaleDownStabilizationWindowSeconds:
+  scaleDownStabilizationWindowSeconds: 300
 
 # grace period seconds after JCC termination signal before force shutdown, default is 30s if empty.
 terminationGracePeriodSeconds: 900

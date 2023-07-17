@@ -24,12 +24,12 @@ provider "aws" {
 
 provider "kubernetes" {
   # Configuration options
-  #config_path = "~/.kube/config"
+  config_path = "~/.kube/config"
 }
 
 provider "helm" {
   # Configuration options
   kubernetes {
-    # config_path = "~/.kube/config"
+    config_path = "~/.kube/config"
   }
 }

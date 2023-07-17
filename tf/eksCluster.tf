@@ -29,8 +29,8 @@ resource "aws_eks_node_group" "eks_nodes" {
   subnet_ids      = aws_subnet.private_subnet.*.id
 
   scaling_config {
-    desired_size = 2
-    max_size     = 2
+    desired_size = 1
+    max_size     = 4
     min_size     = 1
   }
 
@@ -52,7 +52,7 @@ resource "aws_eks_node_group" "eks_nodes" {
     when = create
     command = "./Deployments.sh"
     interpreter = [ "sh" ]
-    working_dir = path.root
+    working_dir = "${path.module}/../scripts/"
   }
 
   provisioner "local-exec" {

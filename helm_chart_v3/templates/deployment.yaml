@@ -31,9 +31,9 @@ spec:
               scheme: HTTPS
               path: /healthz
               port: 8081
-            failureThreshold: 3
+            failureThreshold: 3 # retry threshold
             initialDelaySeconds: 300
-            periodSeconds: 10
+            periodSeconds: 10 # how often to perform the probe
           livenessProbe:
             tcpSocket:
               port: 8081
@@ -43,7 +43,7 @@ spec:
           startupProbe:
             tcpSocket:
               port: 8081
-            failureThreshold: 3
+            failureThreshold: 30
             initialDelaySeconds: 300
             periodSeconds: 10
           {{- end }}
