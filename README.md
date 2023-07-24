@@ -1,4 +1,3 @@
-Clone the repo
 Prerequisites:
     - AWS account (Free tier)
     - VSCode
