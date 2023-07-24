@@ -14,7 +14,7 @@ image:
   tag: latest
 
 # SnapLogic configuration link
-snaplogic_config_link: https://elastic.snaplogic.com/api/1/rest/plex/config/Interworks-Partner/IWC_Support/shared/AngiePlex
+snaplogic_config_link: <link here>
 
 # SnapLogic Org admin credential
 snaplogic_secret: snaplogic
@@ -42,8 +42,8 @@ probes:
 autoscaling:
   enabled: true
 
-  minReplicas: 2
-  maxReplicas: 4
+  minReplicas: 1
+  maxReplicas: 3
 
   # Average count of Snaplex queued pipelines (e.g. targetPlexQueueSize: 5), leave empty to disable
   # To enable this metric, Prometheus and Prometheus-Adapter are required to install.
