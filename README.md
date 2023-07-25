@@ -2,6 +2,7 @@ Prerequisites:
   - AWS account (Free tier)
   - VSCode
   - kubectl, terraform, awscli, helm installed
+  - AWS Secret for accessing the app
 
 Change values for:
   - snaplogic_config_link in helm_chart_v3/values.yaml
