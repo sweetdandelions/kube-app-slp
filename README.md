@@ -1,7 +1,7 @@
 Prerequisites:
-    - AWS account (Free tier)
-    - VSCode
-    - kubectl, terraform, awscli, helm installed
+  - AWS account (Free tier)
+  - VSCode
+  - kubectl, terraform, awscli, helm installed
 
 ```
 # Clone the repo to your local playground
