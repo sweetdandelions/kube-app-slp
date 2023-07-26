@@ -13,7 +13,7 @@ Change values for:
 
 ```
 # Clone the repo to your local playground
-git clone git@github.com:sweetdandelions/kube-app-slp.git
+git clone https://github.com/sweetdandelions/kube-app-slp.git
 cd kube-app-slp/scripts
 
 # Provisioning infrastructure
