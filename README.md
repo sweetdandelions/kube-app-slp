@@ -3,6 +3,7 @@ Prerequisites:
   - VSCode
   - kubectl, terraform, awscli, helm installed
   - AWS Secret for accessing the app
+  - Snaplex in the UI https://docs-snaplogic.atlassian.net/wiki/spaces/SD/pages/2017558845/Deploying+a+Groundplex+in+Kubernetes+with+Elastic+Scaling#DeployingaGroundplexinKuberneteswithElasticScaling-Step1%3ASettinguptheSnaplexintheUI
 
 Change values for:
   - snaplogic_config_link in helm_chart_v3/values.yaml
